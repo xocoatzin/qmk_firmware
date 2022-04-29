@@ -5,17 +5,15 @@
 // #define MASTER_LEFT
 #define EE_HANDS
 
-// Serial comms between halves. Change if using I2C
-#define USE_SERIAL
-#define SOFT_SERIAL_PIN D2
+#define USE_I2C
 
 // I suspect this is only needed for certain ProMicros
 // Not sure what the disadvantages are / why it isn't on by default
 #define SPLIT_USB_DETECT
-// #define SPLIT_LAYER_STATE_ENABLE
-// #define SPLIT_MODS_ENABLE
-// #define SPLIT_WPM_ENABLE
-// #define SPLIT_OLED_ENABLE
+#define SPLIT_LAYER_STATE_ENABLE
+#define SPLIT_MODS_ENABLE
+#define SPLIT_WPM_ENABLE
+#define SPLIT_OLED_ENABLE
 
 // RGB Configuration
 // The pin connected to the data pin of the LEDs
@@ -23,8 +21,10 @@
 #define RGBLED_SPLIT { 29, 29 }
 #define DRIVER_LED_TOTAL 29
 
+// #define OLED_UPDATE_INTERVAL 100
+
 #define RGB_MATRIX_KEYPRESSES
-#define RGB_MATRIX_STARTUP_MODE RGB_MATRIX_GRADIENT_UP_DOWN
+#define RGB_MATRIX_STARTUP_MODE RGB_MATRIX_SOLID_COLOR
 // limits maximum brightness of LEDs to 150 out of 255. Higher may cause the controller to crash.
 #define RGB_MATRIX_MAXIMUM_BRIGHTNESS 75
 #define RGB_MATRIX_HUE_STEP 4
@@ -32,7 +32,7 @@
 #define RGB_MATRIX_VAL_STEP 8
 #define RGB_MATRIX_SPD_STEP 5
 
-// #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
+#define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 
 // RGB animations. Disable the animations you don't want/need.
 // #define DISABLE_RGB_MATRIX_SOLID_COLOR               // Static single hue, no speed support
