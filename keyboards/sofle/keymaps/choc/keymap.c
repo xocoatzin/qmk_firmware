@@ -58,9 +58,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
  * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   K  |   M  |   ,  |   .  |   /  |RShift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *            | LGUI | LAlt | LCTR |LOWER | /Enter  /       \Space \  |RAISE | RCTR | RAlt | RGUI |
+ *            | LGUI | LAlt | LCTR |LOWER  | /Enter  /       \Space \  |RAISE | RCTR | RAlt | RGUI |
  *            |      |      |      |       |/       /         \      \ |      |      |      |      |
- *            `----------------------------------'           '------''---------------------------'
+ *            `----------------------------''------'           '------''---------------------------'
  */
 
 [_COLEMAK] = LAYOUT( \
@@ -137,30 +137,33 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #ifdef RGB_MATRIX_ENABLE
 
-led_config_t g_led_config = { {
-  // Key Matrix to LED Index
-  { 28, 21, 20, 11, 10,      0 },
-  { 27, 22, 19, 12,  9,      1 },
-  { 26, 23, 18, 13,  8,      2 },
-  { 25, 24, 17, 14,  7,      3 },
-  { 16, 15,  6,  5,  4, NO_LED }
-}, {
-  // LED Index to Physical Position
-  { 195, 7 },{ 195, 21 },{ 195, 36 },{ 195, 50 },{ 224, 64 },
-  { 185, 62 },{ 146, 60 },{ 156, 48 },{ 156, 33 },{ 156, 19 },
-  { 156, 5 },{ 117, 3 },{ 117, 17 },{ 117, 31 },{ 117, 46 },
-  { 107, 62 },{ 68, 64 },{ 78, 48 },{ 78, 33 },{ 78, 19 },
-  { 78, 5 },{ 39, 7 },{ 39, 21 },{ 39, 36 },{ 39, 50 },
-  { 0, 50 },{ 0, 36 },{ 0, 21 },{ 0, 7 }
-}, {
-  // LED Index to Flag
-  1, 1, 1, 1, 1,
-  1, 1, 1, 1, 1,
-  1, 1, 1, 1, 1,
-  1, 1, 1, 1, 1,
-  1, 1, 1, 1, 1,
-  1, 1, 1, 1
-} };
+led_config_t g_led_config = {
+    {
+        // Key Matrix to LED Index
+        { 28, 21, 20, 11, 10,      0 },
+        { 27, 22, 19, 12,  9,      1 },
+        { 26, 23, 18, 13,  8,      2 },
+        { 25, 24, 17, 14,  7,      3 },
+        { 16, 15,  6,  5,  4, NO_LED }
+    },
+    {
+        // LED Index to Physical Position
+        { 195,  7 }, { 195, 21 }, { 195, 36 }, { 195, 50 }, { 224, 64 },
+        { 185, 62 }, { 146, 60 }, { 156, 48 }, { 156, 33 }, { 156, 19 },
+        { 156,  5 }, { 117,  3 }, { 117, 17 }, { 117, 31 }, { 117, 46 },
+        { 107, 62 }, {  68, 64 }, {  78, 48 }, {  78, 33 }, {  78, 19 },
+        {  78,  5 }, {  39,  7 }, {  39, 21 }, {  39, 36 }, {  39, 50 },
+        {   0, 50 }, {   0, 36 }, {   0, 21 }, {   0,  7 }
+    },
+    {
+        LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
+        LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
+        LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
+        LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
+        LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
+        LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT
+    }
+};
 
 void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     if (get_highest_layer(layer_state) > 0) {
@@ -181,10 +184,9 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         }
     }
 }
-
 #endif
 
-#ifdef OLED_DRIVER_ENABLE
+#ifdef OLED_ENABLE
 
 static void render_logo(void) {
     static const char PROGMEM qmk_logo[] = {
@@ -249,12 +251,13 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     return rotation;
 }
 
-void oled_task_user(void) {
+bool oled_task_user(void) {
     if (is_keyboard_master()) {
         print_status_narrow();
     } else {
         render_logo();
     }
+    return false;
 }
 
 #endif
@@ -422,7 +425,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 #ifdef ENCODER_ENABLE
 
-bool encoder_update_kb(uint8_t index, bool clockwise) {
+bool encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
         if (IS_LAYER_ON(_RAISE)) {
             if (clockwise) {
