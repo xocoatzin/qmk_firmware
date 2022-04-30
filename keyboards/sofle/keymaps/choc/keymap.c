@@ -35,7 +35,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *            | LGUI | LAlt | LCTR |LOWER | /Enter  /       \Space \  |RAISE | RCTR | RAlt | RGUI |
+ *            | LCTR | LAlt | LGUI |LOWER | /Enter  /       \Space \  |RAISE | RGUI | RAlt | RCTR |
  *            |      |      |      |      |/       /         \      \ |      |      |      |      |
  *            `----------------------------------'           '------''---------------------------'
  */
@@ -45,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_ESC,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,     KC_U,     KC_I,    KC_O,   KC_P,    KC_BSPC, \
   KC_TAB,   KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,     KC_J,     KC_K,    KC_L,   KC_SCLN, KC_QUOT, \
   KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_MUTE,   KC_PSCR, KC_N,     KC_M,     KC_COMM, KC_DOT, KC_SLSH, KC_RSFT, \
-                 KC_LGUI,KC_LALT,KC_LCTRL, KC_LOWER, KC_ENT,    KC_SPC,  KC_RAISE, KC_RCTRL, KC_RALT, KC_RGUI \
+                 KC_LCTRL,KC_LALT,KC_LGUI, KC_LOWER, KC_ENT,    KC_SPC,  KC_RAISE, KC_RGUI, KC_RALT, KC_RGUI \
 ),
 /*
  * COLEMAK
@@ -58,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
  * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   K  |   M  |   ,  |   .  |   /  |RShift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *            | LGUI | LAlt | LCTR |LOWER  | /Enter  /       \Space \  |RAISE | RCTR | RAlt | RGUI |
+ *            | LCTR | LAlt | LGUI |LOWER | /Enter  /       \Space \  |RAISE | RGUI | RAlt | RCTR |
  *            |      |      |      |       |/       /         \      \ |      |      |      |      |
  *            `----------------------------''------'           '------''---------------------------'
  */
@@ -68,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_ESC,   KC_Q,   KC_W,    KC_F,    KC_P,     KC_G,                        KC_J,    KC_L, KC_U,    KC_Y,   KC_SCLN, KC_BSPC, \
   KC_TAB,   KC_A,   KC_R,    KC_S,    KC_T,     KC_D,                        KC_H,    KC_N, KC_E,    KC_I,   KC_O,    KC_QUOT, \
   KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,     KC_B, KC_MUTE,      BL_STEP, KC_K,    KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT, \
-                 KC_LGUI, KC_LALT, KC_LCTRL, KC_LOWER, KC_ENT,      KC_SPC,  KC_RAISE,KC_RCTRL, KC_RALT, KC_RGUI \
+                 KC_LCTRL,KC_LALT,KC_LGUI, KC_LOWER, KC_ENT,        KC_SPC,  KC_RAISE, KC_RGUI, KC_RALT, KC_RGUI \
 ),
 /* LOWER
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -76,11 +76,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |  `   |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  | F12  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | Tab  |   !  |   @  |   #  |   $  |   %  |-------.    ,-------|   ^  |   &  |   *  |   (  |   )  |   |  |
+ * |      |   !  |   @  |   #  |   $  |   %  |-------.    ,-------|   ^  |   &  |   *  |   (  |   )  |   |  |
  * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
- * | Shift|  =   |  -   |  +   |   {  |   }  |-------|    |-------|   [  |   ]  |   ;  |   :  |   \  | Shift|
+ * |      |  =   |  -   |  +   |   {  |   }  |-------|    |-------|   [  |   ]  |   ;  |   :  |   \  | Shift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *            | LGUI | LAlt | LCTR |LOWER | /Enter  /       \Space \  |RAISE | RCTR | RAlt | RGUI |
+ *            |      |      |      |      | /               \      \  |      |      |      |      |
  *            |      |      |      |      |/       /         \      \ |      |      |      |      |
  *            `----------------------------------'           '------''---------------------------'
  */
@@ -92,70 +92,98 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                    _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______\
 ),
 /* RAISE
- * ,----------------------------------------.                    ,-----------------------------------------.
- * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
+ * ,----------------------------------------.                     ,-----------------------------------------.
+ * |      |      |      |      |      |      |                    |      |      |      |      |      | Del  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | Esc  | Ins  | Pscr | Menu |      |      |                    |      | PWrd |  Up  | NWrd | DLine| Bspc |
+ * |      | Ins  | Pscr | Menu |      |      |                    |PG UP | PWrd |  Up  | NWrd | DLine| Bspc |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | Tab  | LAt  | LCtl |LShift|      | Caps |-------.    ,-------|      | Left | Down | Rigth|  Del | Bspc |
+ * |      |      |      |      |      | Caps |-------.    ,-------|PG DN | Left | Down | Rigth|      |      |
  * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
- * |Shift | Undo |  Cut | Copy | Paste|      |-------|    |-------|      | LStr |      | LEnd |      | Shift|
+ * |      | Undo |  Cut | Copy | Paste|      |-------|    |-------|      | LStr |      | LEnd |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *            | LGUI | LAlt | LCTR |LOWER | /Enter  /       \Space \  |RAISE | RCTR | RAlt | RGUI |
+ *            |      |      |      |      | /               \      \  |      |      |      |      |
  *            |      |      |      |      |/       /         \      \ |      |      |      |      |
  *            `----------------------------------'           '------''---------------------------'
  */
 [_RAISE] = LAYOUT( \
-  _______, _______, _______, _______, _______,  _______,                         _______, _______,  _______, _______,  _______ , _______, \
+  _______, _______, _______, _______, _______,  _______,                         _______, _______,  _______, _______,  _______ , KC_DEL, \
   _______, KC_INS,  KC_PSCR, KC_APP,  XXXXXXX,  XXXXXXX,                         KC_PGUP, KC_PRVWD, KC_UP,   KC_NXTWD, KC_DLINE, KC_BSPC, \
-  _______, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,  KC_CAPS,                         KC_PGDN, KC_LEFT,  KC_DOWN, KC_RGHT,  KC_DEL,   KC_BSPC, \
+  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  KC_CAPS,                         KC_PGDN, KC_LEFT,  KC_DOWN, KC_RGHT,  XXXXXXX,  _______, \
   _______, KC_UNDO, KC_CUT,  KC_COPY, KC_PASTE, XXXXXXX, _______,       _______, XXXXXXX, KC_LSTRT, XXXXXXX, KC_LEND,  XXXXXXX,  _______, \
                     _______, _______, _______,  _______, _______,       _______, _______, _______,  _______, _______ \
 ),
 /* ADJUST
  * ,-----------------------------------------.                    ,-----------------------------------------.
- * |RGBSPI|RGBMOD|RGBTOG|RGBHUI|RGBSAI|RGBVAI|                    |      |      |      |      |      |      |
+ * |RGBTOG|RGBMOD|RGBSPI|RGBHUI|RGBSAI|RGBVAI|                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | RESET|      |QWERTY|COLEMK|      |      |                    |      |      |      |      |      |      |
+ * |      |RGBMOD|RGBSPD|RGBHUD|RGBSAD|RGBVAD|                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |MACWIN|      |      |      |-------.    ,-------|      | VOLDO| MUTE | VOLUP|      |      |
- * |------+------+------+------+------+------| EE_CLR|    |       |------+------+------+------+------+------|
- * |      |      |      |      |      |QKBOOT|-------|    |-------|      | PREV | PLAY | NEXT |      |      |
+ * |      |      |MACWIN|      |QWERTY|COLEMK|-------.    ,-------|      | VOLDO| MUTE | VOLUP|      |      |
+ * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
+ * |      |      |      |      |      |      |-------|    |-------|      | PREV | PLAY | NEXT |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *            | LGUI | LAlt | LCTR |LOWER | /Enter  /       \Space \  |RAISE | RCTR | RAlt | RGUI |
+ *            |      |      |      |      | /               \      \  |      |      |      |      |
  *            |      |      |      |      |/       /         \      \ |      |      |      |      |
  *            `----------------------------------'           '------''---------------------------'
  */
   [_ADJUST] = LAYOUT( \
-  RGB_SPI, RGB_MOD, RGB_TOG,   RGB_HUI,    RGB_SAI, RGB_VAI,                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-  RESET,   XXXXXXX, KC_QWERTY, KC_COLEMAK, XXXXXXX, XXXXXXX,                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-  XXXXXXX, XXXXXXX, CG_TOGG,   XXXXXXX,    XXXXXXX, XXXXXXX,                       XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX, \
-  XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX, \
-                    _______,   _______,    _______, _______, _______,     _______, _______, _______, _______, _______ \
+  RGB_TOG, RGB_MOD,  RGB_SPI,  RGB_HUI,    RGB_SAI,   RGB_VAI,                           XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+  XXXXXXX, RGB_RMOD, RGB_SPD,  RGB_HUD,    RGB_SAD,   RGB_VAD,                           XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+  XXXXXXX, XXXXXXX,  CG_TOGG,   XXXXXXX,   KC_QWERTY, KC_COLEMAK,                        XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX, \
+  XXXXXXX, XXXXXXX,  XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,     XXXXXXX,     XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX, \
+                     _______,   _______,   _______,   _______,     _______,     _______, _______, _______, _______, _______ \
   )
 };
 
 #ifdef RGB_MATRIX_ENABLE
 
 led_config_t g_led_config = {
+    // matrix_co
     {
         // Key Matrix to LED Index
+
+        // Left
         { 28, 21, 20, 11, 10,      0 },
         { 27, 22, 19, 12,  9,      1 },
         { 26, 23, 18, 13,  8,      2 },
         { 25, 24, 17, 14,  7,      3 },
-        { 16, 15,  6,  5,  4, NO_LED }
+        { 16, 15,  6,  5,  4, NO_LED },
+
+        // Right
+        { 57, 50, 49, 40, 39,     29 },
+        { 56, 51, 48, 41, 38,     30 },
+        { 55, 52, 47, 42, 37,     31 },
+        { 54, 53, 46, 43, 36,     32 },
+        { 45, 44, 35, 34, 33, NO_LED }
     },
+    // point
     {
         // LED Index to Physical Position
-        { 195,  7 }, { 195, 21 }, { 195, 36 }, { 195, 50 }, { 224, 64 },
-        { 185, 62 }, { 146, 60 }, { 156, 48 }, { 156, 33 }, { 156, 19 },
-        { 156,  5 }, { 117,  3 }, { 117, 17 }, { 117, 31 }, { 117, 46 },
-        { 107, 62 }, {  68, 64 }, {  78, 48 }, {  78, 33 }, {  78, 19 },
-        {  78,  5 }, {  39,  7 }, {  39, 21 }, {  39, 36 }, {  39, 50 },
-        {   0, 50 }, {   0, 36 }, {   0, 21 }, {   0,  7 }
+        // Left
+        { 97,  7 }, { 97, 21 }, { 97, 36 }, { 97, 50 }, { 112, 64 },
+        { 92, 62 }, { 73, 60 }, { 78, 48 }, { 78, 33 }, {  78, 19 },
+        { 78,  5 }, { 58,  3 }, { 58, 17 }, { 58, 31 }, {  58, 46 },
+        { 53, 62 }, { 34, 64 }, { 39, 48 }, { 39, 33 }, {  39, 19 },
+        { 39,  5 }, { 19,  7 }, { 19, 21 }, { 19, 36 }, {  19, 50 },
+        {  0, 50 }, {  0, 36 }, {  0, 21 }, {  0,  7 },
+        // Right
+        { 152,  7 }, { 152, 21 }, { 152, 36 }, { 152, 50 }, { 138, 64 },
+        { 157, 62 }, { 177, 60 }, { 172, 48 }, { 172, 33 }, { 172, 19 },
+        { 172,  5 }, { 191,  3 }, { 191, 17 }, { 191, 31 }, { 191, 46 },
+        { 196, 62 }, { 216, 64 }, { 211, 48 }, { 211, 33 }, { 211, 19 },
+        { 211,  5 }, { 230,  7 }, { 230, 21 }, { 230, 36 }, { 230, 50 },
+        { 250, 50 }, { 250, 36 }, { 250, 21 }, { 250,  7 }
     },
+    // flags
     {
+        // Left
+        LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
+        LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
+        LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
+        LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
+        LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
+        LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
+        // Right
         LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
         LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
         LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
@@ -174,10 +202,71 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                 uint8_t index = g_led_config.matrix_co[row][col];
 
                 if (index >= led_min && index <= led_max && index != NO_LED) {
-                    if(keymap_key_to_keycode(layer, (keypos_t){col,row}) > KC_TRNS) {
-                        // rgb_matrix_set_color(index, RGB_GREEN);
-                    } else {
-                        rgb_matrix_set_color(index, RGB_OFF);
+                    uint16_t key_code = keymap_key_to_keycode(layer, (keypos_t){col,row});
+
+                    switch(key_code) {
+                        case KC_LCBR:
+                        case KC_RCBR:
+                        case KC_LBRC:
+                        case KC_RBRC:
+                            rgb_matrix_set_color(index, RGB_WHITE);
+                            break;
+
+                        case KC_F1:
+                        case KC_F2:
+                        case KC_F3:
+                        case KC_F4:
+                        case KC_F5:
+                        case KC_F6:
+                        case KC_F7:
+                        case KC_F8:
+                        case KC_F9:
+                        case KC_F10:
+                        case KC_F11:
+                        case KC_F12:
+                            rgb_matrix_set_color(index, RGB_GOLD);
+                            break;
+
+                        case KC_VOLD:
+                        case KC_VOLU:
+                        case KC_MUTE:
+                            rgb_matrix_set_color(index, RGB_CORAL);
+                            break;
+
+                        case RGB_TOG:
+                        case RGB_MOD:
+                        case RGB_SPI:
+                        case RGB_HUI:
+                        case RGB_SAI:
+                        case RGB_VAI:
+                        case RGB_RMOD:
+                        case RGB_SPD:
+                        case RGB_HUD:
+                        case RGB_SAD:
+                        case RGB_VAD:
+                            rgb_matrix_set_color(index, RGB_GOLDENROD);
+                            break;
+
+                        case KC_QWERTY:
+                        case KC_COLEMAK:
+                        case CG_TOGG:
+                            rgb_matrix_set_color(index, RGB_GREEN);
+                            break;
+
+                        case KC_UP:
+                        case KC_DOWN:
+                        case KC_LEFT:
+                        case KC_RGHT:
+                            rgb_matrix_set_color(index, RGB_RED);
+                            break;
+
+                        case KC_TRNS:
+                        case XXXXXXX:
+                            rgb_matrix_set_color(index, RGB_OFF);
+                            break;
+
+                        default:
+                            break;
                     }
                 }
             }
@@ -188,15 +277,15 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 
 #ifdef OLED_ENABLE
 
-static void render_logo(void) {
-    static const char PROGMEM qmk_logo[] = {
-        0x80,0x81,0x82,0x83,0x84,0x85,0x86,0x87,0x88,0x89,0x8a,0x8b,0x8c,0x8d,0x8e,0x8f,0x90,0x91,0x92,0x93,0x94,
-        0xa0,0xa1,0xa2,0xa3,0xa4,0xa5,0xa6,0xa7,0xa8,0xa9,0xaa,0xab,0xac,0xad,0xae,0xaf,0xb0,0xb1,0xb2,0xb3,0xb4,
-        0xc0,0xc1,0xc2,0xc3,0xc4,0xc5,0xc6,0xc7,0xc8,0xc9,0xca,0xcb,0xcc,0xcd,0xce,0xcf,0xd0,0xd1,0xd2,0xd3,0xd4,0
-    };
-
-    oled_write_P(qmk_logo, false);
-}
+// static void render_logo(void) {
+//     static const char PROGMEM qmk_logo[] = {
+//         0x80,0x81,0x82,0x83,0x84,0x85,0x86,0x87,0x88,0x89,0x8a,0x8b,0x8c,0x8d,0x8e,0x8f,0x90,0x91,0x92,0x93,0x94,
+//         0xa0,0xa1,0xa2,0xa3,0xa4,0xa5,0xa6,0xa7,0xa8,0xa9,0xaa,0xab,0xac,0xad,0xae,0xaf,0xb0,0xb1,0xb2,0xb3,0xb4,
+//         0xc0,0xc1,0xc2,0xc3,0xc4,0xc5,0xc6,0xc7,0xc8,0xc9,0xca,0xcb,0xcc,0xcd,0xce,0xcf,0xd0,0xd1,0xd2,0xd3,0xd4,0
+//     };
+//
+//     oled_write_P(qmk_logo, false);
+// }
 
 static void print_status_narrow(void) {
     // Print current mode
@@ -255,7 +344,7 @@ bool oled_task_user(void) {
     if (is_keyboard_master()) {
         print_status_narrow();
     } else {
-        render_logo();
+        // render_logo();
     }
     return false;
 }

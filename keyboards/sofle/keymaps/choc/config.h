@@ -12,14 +12,16 @@
 #define SPLIT_USB_DETECT
 #define SPLIT_LAYER_STATE_ENABLE
 #define SPLIT_MODS_ENABLE
-#define SPLIT_WPM_ENABLE
-#define SPLIT_OLED_ENABLE
+// #define SPLIT_WPM_ENABLE
+// #define SPLIT_OLED_ENABLE
+#define SPLIT_TRANSPORT_MIRROR
 
 // RGB Configuration
 // The pin connected to the data pin of the LEDs
 #define RGB_DI_PIN D3
-#define RGBLED_SPLIT { 29, 29 }
-#define DRIVER_LED_TOTAL 29
+// #define RGBLED_SPLIT { 29, 29 }
+#define RGB_MATRIX_SPLIT { 29, 29 }
+#define DRIVER_LED_TOTAL 58
 
 // #define OLED_UPDATE_INTERVAL 100
 
