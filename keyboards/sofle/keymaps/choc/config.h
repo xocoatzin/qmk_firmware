@@ -72,6 +72,7 @@
 #define DISABLE_RGB_MATRIX_PIXEL_FLOW                // Pulsing RGB flow along LED wiring with random hues
 #define DISABLE_RGB_MATRIX_PIXEL_RAIN                // Randomly light keys with random hues
 #define ENABLE_RGB_MATRIX_TYPING_HEATMAP            // How hot is your WPM!
+#define RGB_MATRIX_TYPING_HEATMAP_DECREASE_DELAY_MS 100
 #define DISABLE_RGB_MATRIX_DIGITAL_RAIN              // That famous computer simulation
 #define ENABLE_RGB_MATRIX_SOLID_REACTIVE_SIMPLE     // Pulses keys hit to hue & value then fades value out
 #define ENABLE_RGB_MATRIX_SOLID_REACTIVE            // Static single hue, pulses keys hit to shifted hue then fades to current hue

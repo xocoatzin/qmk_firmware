@@ -29,46 +29,46 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |  `   |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  =   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | ESC  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  | Bspc |
+ * | TAB  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  | Bspc |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | Tab  |   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |  '   |
+ * | ESC  |   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |  '   |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *            | LCTR | LAlt | LGUI |LOWER | /Enter  /       \Space \  |RAISE | RGUI | RAlt | RCTR |
+ *            | LGUI | LAlt | LCTR |LOWER | /Enter  /       \Space \  |RAISE | RCTR | RAlt | RGUI |
  *            |      |      |      |      |/       /         \      \ |      |      |      |      |
  *            `----------------------------------'           '------''---------------------------'
  */
 
 [_QWERTY] = LAYOUT( \
   KC_GRV,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,     KC_7,     KC_8,    KC_9,   KC_0,    KC_EQL, \
-  KC_ESC,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,     KC_U,     KC_I,    KC_O,   KC_P,    KC_BSPC, \
-  KC_TAB,   KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,     KC_J,     KC_K,    KC_L,   KC_SCLN, KC_QUOT, \
+  KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,     KC_U,     KC_I,    KC_O,   KC_P,    KC_BSPC, \
+  KC_ESC,   KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,     KC_J,     KC_K,    KC_L,   KC_SCLN, KC_QUOT, \
   KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_MUTE,   KC_PSCR, KC_N,     KC_M,     KC_COMM, KC_DOT, KC_SLSH, KC_RSFT, \
-                 KC_LCTRL,KC_LALT,KC_LGUI, KC_LOWER, KC_ENT,    KC_SPC,  KC_RAISE, KC_RGUI, KC_RALT, KC_RGUI \
+                 KC_LGUI,KC_LALT,KC_LCTL, KC_LOWER, KC_ENT,    KC_SPC,  KC_RAISE, KC_RCTL, KC_RALT, KC_RGUI \
 ),
 /*
  * COLEMAK
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |  `   |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  =   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | ESC  |   Q  |   W  |   F  |   P  |   G  |                    |   J  |   L  |   U  |   Y  |   ;  | Bspc |
+ * | TAB  |   Q  |   W  |   F  |   P  |   G  |                    |   J  |   L  |   U  |   Y  |   ;  | Bspc |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | TAB  |   A  |   R  |   S  |   T  |   D  |-------.    ,-------|   H  |   N  |   E  |   I  |   O  |  '   |
+ * | ESC  |   A  |   R  |   S  |   T  |   D  |-------.    ,-------|   H  |   N  |   E  |   I  |   O  |  '   |
  * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
  * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   K  |   M  |   ,  |   .  |   /  |RShift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *            | LCTR | LAlt | LGUI |LOWER | /Enter  /       \Space \  |RAISE | RGUI | RAlt | RCTR |
- *            |      |      |      |       |/       /         \      \ |      |      |      |      |
+ *            | LGUI | LAlt | LCTR |LOWER | /Enter  /       \Space \  |RAISE | RCTR | RAlt | RGUI |
+ *            |      |      |      |      |/       /         \      \ |      |      |      |      |
  *            `----------------------------''------'           '------''---------------------------'
  */
 
 [_COLEMAK] = LAYOUT( \
   KC_GRV,   KC_1,   KC_2,    KC_3,    KC_4,     KC_5,                        KC_6,    KC_7, KC_8,    KC_9,   KC_0,    KC_EQL,  \
-  KC_ESC,   KC_Q,   KC_W,    KC_F,    KC_P,     KC_G,                        KC_J,    KC_L, KC_U,    KC_Y,   KC_SCLN, KC_BSPC, \
-  KC_TAB,   KC_A,   KC_R,    KC_S,    KC_T,     KC_D,                        KC_H,    KC_N, KC_E,    KC_I,   KC_O,    KC_QUOT, \
+  KC_TAB,   KC_Q,   KC_W,    KC_F,    KC_P,     KC_G,                        KC_J,    KC_L, KC_U,    KC_Y,   KC_SCLN, KC_BSPC, \
+  KC_ESC,   KC_A,   KC_R,    KC_S,    KC_T,     KC_D,                        KC_H,    KC_N, KC_E,    KC_I,   KC_O,    KC_QUOT, \
   KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,     KC_B, KC_MUTE,      BL_STEP, KC_K,    KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT, \
-                 KC_LCTRL,KC_LALT,KC_LGUI, KC_LOWER, KC_ENT,        KC_SPC,  KC_RAISE, KC_RGUI, KC_RALT, KC_RGUI \
+                 KC_LGUI, KC_LALT, KC_LCTL, KC_LOWER, KC_ENT,       KC_SPC,  KC_RAISE, KC_RCTL, KC_RALT, KC_RGUI \
 ),
 /* LOWER
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -160,10 +160,10 @@ led_config_t g_led_config = {
     {
         // LED Index to Physical Position
         // Left
-        { 97,  7 }, { 97, 21 }, { 97, 36 }, { 97, 50 }, { 112, 64 },
-        { 92, 62 }, { 73, 60 }, { 78, 48 }, { 78, 33 }, {  78, 19 },
+        { 97,  7 }, { 97, 21 }, { 97, 36 }, { 97, 50 }, { 82, 64 },
+        { 62, 62 }, { 43, 60 }, { 78, 48 }, { 78, 33 }, {  78, 19 },
         { 78,  5 }, { 58,  3 }, { 58, 17 }, { 58, 31 }, {  58, 46 },
-        { 53, 62 }, { 34, 64 }, { 39, 48 }, { 39, 33 }, {  39, 19 },
+        { 23, 62 }, { 04, 64 }, { 39, 48 }, { 39, 33 }, {  39, 19 },
         { 39,  5 }, { 19,  7 }, { 19, 21 }, { 19, 36 }, {  19, 50 },
         {  0, 50 }, {  0, 36 }, {  0, 21 }, {  0,  7 },
         // Right
