@@ -5,6 +5,18 @@ RGB_MATRIX_EFFECT(TYPING_HEATMAP)
 #        ifndef RGB_MATRIX_TYPING_HEATMAP_DECREASE_DELAY_MS
 #            define RGB_MATRIX_TYPING_HEATMAP_DECREASE_DELAY_MS 25
 #        endif
+#        ifndef RGB_MATRIX_TYPING_HEATMAP_MIN_TEMPERATURE
+#            define RGB_MATRIX_TYPING_HEATMAP_MIN_TEMPERATURE 4
+#        endif
+#        ifndef RGB_MATRIX_TYPING_HEATMAP_INCREASE_VALUE
+#            define RGB_MATRIX_TYPING_HEATMAP_INCREASE_VALUE 8
+#        endif
+#        ifndef RGB_MATRIX_TYPING_HEATMAP_INCREASE_VALUE_SIDES
+#            define RGB_MATRIX_TYPING_HEATMAP_INCREASE_VALUE_SIDES 6
+#        endif
+#        ifndef RGB_MATRIX_TYPING_HEATMAP_INCREASE_VALUE_DIAGONAL
+#            define RGB_MATRIX_TYPING_HEATMAP_INCREASE_VALUE_DIAGONAL 2
+#        endif
 
 void process_rgb_matrix_typing_heatmap(uint8_t row, uint8_t col) {
     uint8_t m_row = row - 1;
@@ -12,20 +24,20 @@ void process_rgb_matrix_typing_heatmap(uint8_t row, uint8_t col) {
     uint8_t m_col = col - 1;
     uint8_t p_col = col + 1;
 
-    if (m_col < col) g_rgb_frame_buffer[row][m_col] = qadd8(g_rgb_frame_buffer[row][m_col], 16);
-    g_rgb_frame_buffer[row][col] = qadd8(g_rgb_frame_buffer[row][col], 32);
-    if (p_col < MATRIX_COLS) g_rgb_frame_buffer[row][p_col] = qadd8(g_rgb_frame_buffer[row][p_col], 16);
+    if (m_col < col) g_rgb_frame_buffer[row][m_col] = qadd8(g_rgb_frame_buffer[row][m_col], RGB_MATRIX_TYPING_HEATMAP_INCREASE_VALUE_SIDES);
+    g_rgb_frame_buffer[row][col] = qadd8(g_rgb_frame_buffer[row][col], RGB_MATRIX_TYPING_HEATMAP_INCREASE_VALUE);
+    if (p_col < MATRIX_COLS) g_rgb_frame_buffer[row][p_col] = qadd8(g_rgb_frame_buffer[row][p_col], RGB_MATRIX_TYPING_HEATMAP_INCREASE_VALUE_SIDES);
 
     if (p_row < MATRIX_ROWS) {
-        if (m_col < col) g_rgb_frame_buffer[p_row][m_col] = qadd8(g_rgb_frame_buffer[p_row][m_col], 13);
-        g_rgb_frame_buffer[p_row][col] = qadd8(g_rgb_frame_buffer[p_row][col], 16);
-        if (p_col < MATRIX_COLS) g_rgb_frame_buffer[p_row][p_col] = qadd8(g_rgb_frame_buffer[p_row][p_col], 13);
+        if (m_col < col) g_rgb_frame_buffer[p_row][m_col] = qadd8(g_rgb_frame_buffer[p_row][m_col], RGB_MATRIX_TYPING_HEATMAP_INCREASE_VALUE_DIAGONAL);
+        g_rgb_frame_buffer[p_row][col] = qadd8(g_rgb_frame_buffer[p_row][col], RGB_MATRIX_TYPING_HEATMAP_INCREASE_VALUE_SIDES);
+        if (p_col < MATRIX_COLS) g_rgb_frame_buffer[p_row][p_col] = qadd8(g_rgb_frame_buffer[p_row][p_col], RGB_MATRIX_TYPING_HEATMAP_INCREASE_VALUE_DIAGONAL);
     }
 
     if (m_row < row) {
-        if (m_col < col) g_rgb_frame_buffer[m_row][m_col] = qadd8(g_rgb_frame_buffer[m_row][m_col], 13);
-        g_rgb_frame_buffer[m_row][col] = qadd8(g_rgb_frame_buffer[m_row][col], 16);
-        if (p_col < MATRIX_COLS) g_rgb_frame_buffer[m_row][p_col] = qadd8(g_rgb_frame_buffer[m_row][p_col], 13);
+        if (m_col < col) g_rgb_frame_buffer[m_row][m_col] = qadd8(g_rgb_frame_buffer[m_row][m_col], RGB_MATRIX_TYPING_HEATMAP_INCREASE_VALUE_DIAGONAL);
+        g_rgb_frame_buffer[m_row][col] = qadd8(g_rgb_frame_buffer[m_row][col], RGB_MATRIX_TYPING_HEATMAP_INCREASE_VALUE_SIDES);
+        if (p_col < MATRIX_COLS) g_rgb_frame_buffer[m_row][p_col] = qadd8(g_rgb_frame_buffer[m_row][p_col], RGB_MATRIX_TYPING_HEATMAP_INCREASE_VALUE_DIAGONAL);
     }
 }
 
@@ -42,7 +54,7 @@ bool TYPING_HEATMAP(effect_params_t* params) {
 
     if (params->init) {
         rgb_matrix_set_color_all(0, 0, 0);
-        memset(g_rgb_frame_buffer, 0, sizeof g_rgb_frame_buffer);
+        memset(g_rgb_frame_buffer, RGB_MATRIX_TYPING_HEATMAP_MIN_TEMPERATURE, sizeof g_rgb_frame_buffer);
     }
 
     // The heatmap animation might run in several iterations depending on
@@ -74,7 +86,7 @@ bool TYPING_HEATMAP(effect_params_t* params) {
             rgb_matrix_set_color(led[j], rgb.r, rgb.g, rgb.b);
         }
 
-        if (decrease_heatmap_values) {
+        if (decrease_heatmap_values && g_rgb_frame_buffer[row][col] > RGB_MATRIX_TYPING_HEATMAP_MIN_TEMPERATURE) {
             g_rgb_frame_buffer[row][col] = qsub8(val, 1);
         }
     }
