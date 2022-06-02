@@ -95,11 +95,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,----------------------------------------.                     ,-----------------------------------------.
  * |      |      |      |      |      |      |                    |      |      |      |      |      | Del  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      | Ins  | Pscr | Menu |      |      |                    |PG UP | PWrd |  Up  | NWrd | DLine| Bspc |
+ * |      | Ins  | Pscr | Menu |      |      |                    |PG UP | LStr | PWrd | NWrd | LEnd | Bspc |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      | Caps |-------.    ,-------|PG DN | Left | Down | Rigth|      |      |
+ * |      |      |      |      |      | Caps |-------.    ,-------|PG DN | Left | Down |  Up  | Rigth| DLine|
  * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
- * |      | Undo |  Cut | Copy | Paste|      |-------|    |-------|      | LStr |      | LEnd |      |      |
+ * |      | Undo |  Cut | Copy | Paste|      |-------|    |-------|      |      |      |      |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *            |      |      |      |      | /               \      \  |      |      |      |      |
  *            |      |      |      |      |/       /         \      \ |      |      |      |      |
@@ -107,9 +107,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_RAISE] = LAYOUT( \
   _______, _______, _______, _______, _______,  _______,                         _______, _______,  _______, _______,  _______ , KC_DEL, \
-  _______, KC_INS,  KC_PSCR, KC_APP,  XXXXXXX,  XXXXXXX,                         KC_PGUP, KC_PRVWD, KC_UP,   KC_NXTWD, KC_DLINE, KC_BSPC, \
-  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  KC_CAPS,                         KC_PGDN, KC_LEFT,  KC_DOWN, KC_RGHT,  XXXXXXX,  _______, \
-  _______, KC_UNDO, KC_CUT,  KC_COPY, KC_PASTE, XXXXXXX, _______,       _______, XXXXXXX, KC_LSTRT, XXXXXXX, KC_LEND,  XXXXXXX,  _______, \
+  _______, KC_INS,  KC_PSCR, KC_APP,  XXXXXXX,  XXXXXXX,                         KC_PGUP, KC_LSTRT, KC_PRVWD,KC_NXTWD, KC_LEND,  KC_BSPC, \
+  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  KC_CAPS,                         KC_PGDN, KC_LEFT,  KC_DOWN, KC_UP,    KC_RGHT,  KC_DLINE, \
+  _______, KC_UNDO, KC_CUT,  KC_COPY, KC_PASTE, XXXXXXX, _______,       _______, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,  XXXXXXX,  _______, \
                     _______, _______, _______,  _______, _______,       _______, _______, _______,  _______, _______ \
 ),
 /* ADJUST
@@ -209,7 +209,7 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                         case KC_RCBR:
                         case KC_LBRC:
                         case KC_RBRC:
-                            rgb_matrix_set_color(index, RGB_WHITE);
+                            rgb_matrix_set_color(index, RGB_AZURE);
                             break;
 
                         case KC_F1:
@@ -230,7 +230,13 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                         case KC_VOLD:
                         case KC_VOLU:
                         case KC_MUTE:
-                            rgb_matrix_set_color(index, RGB_CORAL);
+                            rgb_matrix_set_color(index, RGB_TEAL);
+                            break;
+
+                        case KC_MPRV:
+                        case KC_MPLY:
+                        case KC_MNXT:
+                            rgb_matrix_set_color(index, RGB_PURPLE);
                             break;
 
                         case RGB_TOG:
@@ -253,11 +259,24 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                             rgb_matrix_set_color(index, RGB_GREEN);
                             break;
 
+                        case KC_DEL:
+                        case KC_BSPC:
+                        case KC_DLINE:
+                            rgb_matrix_set_color(index, RGB_RED);
+                            break;
+
                         case KC_UP:
                         case KC_DOWN:
                         case KC_LEFT:
                         case KC_RGHT:
-                            rgb_matrix_set_color(index, RGB_RED);
+                            rgb_matrix_set_color(index, RGB_WHITE);
+                            break;
+
+                        case KC_LSTRT:
+                        case KC_PRVWD:
+                        case KC_NXTWD:
+                        case KC_LEND:
+                            rgb_matrix_set_color(index, RGB_BLUE);
                             break;
 
                         case KC_TRNS:
