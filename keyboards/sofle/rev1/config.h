@@ -6,6 +6,7 @@
 #define DEVICE_VER      0x0001
 #define MANUFACTURER    JosefAdamcik
 #define PRODUCT         Sofle
+#define USB_POLLING_INTERVAL_MS 1
 
 /* key matrix size */
 // Rows are doubled-up

@@ -193,105 +193,26 @@ led_config_t g_led_config = {
     }
 };
 
-void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-    if (get_highest_layer(layer_state) > 0) {
-        uint8_t layer = get_highest_layer(layer_state);
 
-        for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
-            for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
-                uint8_t index = g_led_config.matrix_co[row][col];
 
-                if (index >= led_min && index <= led_max && index != NO_LED) {
-                    uint16_t key_code = keymap_key_to_keycode(layer, (keypos_t){col,row});
-
-                    switch(key_code) {
-                        case KC_LCBR:
-                        case KC_RCBR:
-                        case KC_LBRC:
-                        case KC_RBRC:
-                            rgb_matrix_set_color(index, RGB_AZURE);
-                            break;
-
-                        case KC_F1:
-                        case KC_F2:
-                        case KC_F3:
-                        case KC_F4:
-                        case KC_F5:
-                        case KC_F6:
-                        case KC_F7:
-                        case KC_F8:
-                        case KC_F9:
-                        case KC_F10:
-                        case KC_F11:
-                        case KC_F12:
-                            rgb_matrix_set_color(index, RGB_GOLD);
-                            break;
-
-                        case KC_VOLD:
-                        case KC_VOLU:
-                        case KC_MUTE:
-                            rgb_matrix_set_color(index, RGB_TEAL);
-                            break;
-
-                        case KC_MPRV:
-                        case KC_MPLY:
-                        case KC_MNXT:
-                            rgb_matrix_set_color(index, RGB_PURPLE);
-                            break;
-
-                        case RGB_TOG:
-                        case RGB_MOD:
-                        case RGB_SPI:
-                        case RGB_HUI:
-                        case RGB_SAI:
-                        case RGB_VAI:
-                        case RGB_RMOD:
-                        case RGB_SPD:
-                        case RGB_HUD:
-                        case RGB_SAD:
-                        case RGB_VAD:
-                            rgb_matrix_set_color(index, RGB_GOLDENROD);
-                            break;
-
-                        case KC_QWERTY:
-                        case KC_COLEMAK:
-                        case CG_TOGG:
-                            rgb_matrix_set_color(index, RGB_GREEN);
-                            break;
-
-                        case KC_DEL:
-                        case KC_BSPC:
-                        case KC_DLINE:
-                            rgb_matrix_set_color(index, RGB_RED);
-                            break;
-
-                        case KC_UP:
-                        case KC_DOWN:
-                        case KC_LEFT:
-                        case KC_RGHT:
-                            rgb_matrix_set_color(index, RGB_WHITE);
-                            break;
-
-                        case KC_LSTRT:
-                        case KC_PRVWD:
-                        case KC_NXTWD:
-                        case KC_LEND:
-                            rgb_matrix_set_color(index, RGB_BLUE);
-                            break;
-
-                        case KC_TRNS:
-                        case XXXXXXX:
-                            rgb_matrix_set_color(index, RGB_OFF);
-                            break;
-
-                        default:
-                            break;
-                    }
-                }
-            }
-        }
+layer_state_t layer_state_set_user(layer_state_t state) {
+    switch (get_highest_layer(state)) {
+        case _RAISE:
+            rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_layer_indicator);
+            break;
+        case _LOWER:
+            rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_layer_indicator);
+            break;
+        case _ADJUST:
+            rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_layer_indicator);
+            break;
+        default: // for any other layers, or the default layer
+            rgb_matrix_reload_from_eeprom();
+            break;
     }
+    return state;
 }
+
 #endif
 
 #ifdef OLED_ENABLE
@@ -370,7 +291,7 @@ bool oled_task_user(void) {
 
 #endif
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     switch (keycode) {
         case KC_QWERTY:
             if (record->event.pressed) {
@@ -427,7 +348,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             break;
         case KC_NXTWD:
-             if (record->event.pressed) {
+            if (record->event.pressed) {
                 if (keymap_config.swap_lctl_lgui) {
                     register_mods(mod_config(MOD_LALT));
                     register_code(KC_RIGHT);
@@ -448,7 +369,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_LSTRT:
             if (record->event.pressed) {
                 if (keymap_config.swap_lctl_lgui) {
-                     //CMD-arrow on Mac, but we have CTL and GUI swapped
+                    // CMD-arrow on Mac, but we have CTL and GUI swapped
                     register_mods(mod_config(MOD_LCTL));
                     register_code(KC_LEFT);
                 } else {
@@ -466,7 +387,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_LEND:
             if (record->event.pressed) {
                 if (keymap_config.swap_lctl_lgui) {
-                    //CMD-arrow on Mac, but we have CTL and GUI swapped
+                    // CMD-arrow on Mac, but we have CTL and GUI swapped
                     register_mods(mod_config(MOD_LCTL));
                     register_code(KC_RIGHT);
                 } else {
