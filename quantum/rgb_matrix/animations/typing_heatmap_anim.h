@@ -3,10 +3,10 @@ RGB_MATRIX_EFFECT(TYPING_HEATMAP)
 #    ifdef RGB_MATRIX_CUSTOM_EFFECT_IMPLS
 
 #        ifndef RGB_MATRIX_TYPING_HEATMAP_DECREASE_DELAY_MS
-#            define RGB_MATRIX_TYPING_HEATMAP_DECREASE_DELAY_MS 25
+#            define RGB_MATRIX_TYPING_HEATMAP_DECREASE_DELAY_MS 50
 #        endif
 #        ifndef RGB_MATRIX_TYPING_HEATMAP_MIN_TEMPERATURE
-#            define RGB_MATRIX_TYPING_HEATMAP_MIN_TEMPERATURE 4
+#            define RGB_MATRIX_TYPING_HEATMAP_MIN_TEMPERATURE 8
 #        endif
 #        ifndef RGB_MATRIX_TYPING_HEATMAP_INCREASE_VALUE
 #            define RGB_MATRIX_TYPING_HEATMAP_INCREASE_VALUE 8
@@ -81,7 +81,7 @@ bool TYPING_HEATMAP(effect_params_t* params) {
         for (uint8_t j = 0; j < led_count; ++j) {
             if (!HAS_ANY_FLAGS(g_led_config.flags[led[j]], params->flags)) continue;
 
-            HSV hsv = {170 - qsub8(val, 85), rgb_matrix_config.hsv.s, scale8((qadd8(170, val) - 170) * 3, rgb_matrix_config.hsv.v)};
+            HSV hsv = {rgb_matrix_config.hsv.h - qsub8(val, 85), rgb_matrix_config.hsv.s, scale8((qadd8(170, val) - 170) * 3, rgb_matrix_config.hsv.v)};
             RGB rgb = rgb_matrix_hsv_to_rgb(hsv);
             rgb_matrix_set_color(led[j], rgb.r, rgb.g, rgb.b);
         }
