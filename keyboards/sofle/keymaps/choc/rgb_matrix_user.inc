@@ -8,6 +8,13 @@ RGB_MATRIX_EFFECT(layer_indicator)
 static void layer_indicator_complex_init(effect_params_t* params) {
     // some_global_state = 1;
 }
+
+static inline void set_color(uint8_t index, uint8_t h, uint8_t s, uint8_t v) {
+    HSV hsv = { h, rgb_matrix_get_sat(), rgb_matrix_get_val() };
+    RGB rgb = hsv_to_rgb(hsv);
+    rgb_matrix_set_color(index, rgb.r, rgb.g, rgb.b);
+}
+
 static bool layer_indicator_complex_run(effect_params_t* params) {
     RGB_MATRIX_USE_LIMITS(led_min, led_max);
 
@@ -44,7 +51,7 @@ static bool layer_indicator_complex_run(effect_params_t* params) {
                     case KC_RCBR:
                     case KC_LBRC:
                     case KC_RBRC:
-                        rgb_matrix_set_color(index, RGB_ORANGE);
+                        set_color(index, HSV_ORANGE);
                         break;
 
                     // Fn
@@ -60,28 +67,29 @@ static bool layer_indicator_complex_run(effect_params_t* params) {
                     case KC_F10:
                     case KC_F11:
                     case KC_F12:
-                        rgb_matrix_set_color(index, RGB_PURPLE);
+                        set_color(index, HSV_PURPLE);
                         break;
 
                     // Audio
                     case KC_VOLD:
                     case KC_VOLU:
                     case KC_MUTE:
-                        rgb_matrix_set_color(index, RGB_PURPLE);
+                        set_color(index, HSV_PURPLE);
                         break;
 
                     // Multimedia
                     case KC_MPRV:
                     case KC_MPLY:
                     case KC_MNXT:
-                        rgb_matrix_set_color(index, RGB_MAGENTA);
+                        set_color(index, HSV_MAGENTA);
                         break;
 
                     // Colors
                     case RGB_MOD:
                     case RGB_RMOD:
-                        rgb_matrix_set_color(index, RGB_GOLD);
+                        set_color(index, HSV_GOLD);
                         break;
+
                     case RGB_TOG:
                     case RGB_SPI:
                     case RGB_SPD:
@@ -91,7 +99,7 @@ static bool layer_indicator_complex_run(effect_params_t* params) {
                     case RGB_SAD:
                     case RGB_VAI:
                     case RGB_VAD:
-                        rgb_matrix_set_color(index, RGB_GREEN);
+                        set_color(index, HSV_GREEN);
                         break;
 
                     // Toggles
@@ -105,7 +113,7 @@ static bool layer_indicator_complex_run(effect_params_t* params) {
                     case KC_DEL:
                     // case KC_BSPC:
                     // case KC_DLINE:
-                        rgb_matrix_set_color(index, RGB_RED);
+                        set_color(index, HSV_RED);
                         break;
 
                     // Arrows
@@ -113,7 +121,7 @@ static bool layer_indicator_complex_run(effect_params_t* params) {
                     case KC_DOWN:
                     case KC_LEFT:
                     case KC_RGHT:
-                        rgb_matrix_set_color(index, RGB_WHITE);
+                        set_color(index, HSV_WHITE);
                         break;
 
                     // Movements
@@ -131,7 +139,7 @@ static bool layer_indicator_complex_run(effect_params_t* params) {
                         break;
 
                     default:
-                        rgb_matrix_set_color(index, RGB_TEAL);
+                        set_color(index, HSV_TEAL);
                         break;
                 }
             }
